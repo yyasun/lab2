@@ -28,15 +28,15 @@ namespace Lab2
             onbudget.Sort();
             int i;
             Console.OutputEncoding = Encoding.Unicode;
-            for (i = lst.Count-1;i>lst.Count*0.4;i--)
-            {
-                Console.WriteLine($"{lst[i].Name},{lst[i].AvgGrade}");
-            }
+
+            using (StreamWriter sw = new StreamWriter(File.Create("allstuds.csv")))
+                for (i = lst.Count - 1; i > lst.Count * 0.4; i--)
+                {
+                    Console.WriteLine($"{lst[i].Name},{lst[i].AvgGrade}");
+                    sw.WriteLine($"{lst[i].Name},{lst[i].AvgGrade}");
+                }
             Console.WriteLine();
-            Console.WriteLine($"Minimal grade to recieve scholarship: {lst[i+1].AvgGrade}");
-
-
-            File.WriteAllLines("allstuds.csv", StudentParser.ConvertToAvgGradeCSV(lst));
+            Console.WriteLine($"Minimal grade to recieve scholarship: {lst[i+1].AvgGrade}");            
         }
         //static void
     }
